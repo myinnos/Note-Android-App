@@ -19,14 +19,14 @@ plugins {
 }
 
 ext {
-    activityVersion = '1.2.3'
+    activityVersion = '1.4.0'
     appCompatVersion = '1.4.1'
     constraintLayoutVersion = '2.0.4'
-    coreTestingVersion = '2.1.0'
-    coroutines = '1.5.0'
-    lifecycleVersion = '2.3.1'
     materialVersion = '1.3.0'
-    roomVersion = '2.3.0'
+
+    coroutines = '1.5.2'
+    lifecycleVersion = '2.4.1'
+    roomVersion = '2.4.2'
 }
 
 task clean(type: Delete) {

@@ -1,4 +1,4 @@
-package `in`.myinnos.androidnote
+package `in`.myinnos.androidnote.database
 
 import androidx.lifecycle.LiveData
 

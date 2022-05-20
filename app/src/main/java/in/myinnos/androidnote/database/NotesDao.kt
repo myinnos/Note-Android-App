@@ -1,4 +1,4 @@
-package `in`.myinnos.androidnote
+package `in`.myinnos.androidnote.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -8,17 +8,17 @@ abstract class NotesDao {
 
     // to insert data
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(note: Note) {
+    fun insert(note: Note) {
     }
 
     // to delete data
     @Delete
-    suspend fun delete(note: Note) {
+    fun delete(note: Note) {
     }
 
     // to update data
     @Update
-    suspend fun update(note: Note) {
+    fun update(note: Note) {
     }
 
     // to read the data (all the data)
