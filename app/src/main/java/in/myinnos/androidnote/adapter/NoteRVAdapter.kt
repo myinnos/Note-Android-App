@@ -4,6 +4,7 @@ import `in`.myinnos.androidnote.R
 import `in`.myinnos.androidnote.database.Note
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,7 @@ class NoteRVAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: List<Note>) {
         allNotes.clear()
+        Log.d("NOTES_DATA", newList.toString())
         allNotes.addAll(newList)
         notifyDataSetChanged()
     }

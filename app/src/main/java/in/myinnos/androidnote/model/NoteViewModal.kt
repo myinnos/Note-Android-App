@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 class NoteViewModal(application: Application): AndroidViewModel(application) {
 
     // variable creation
-    private val allNotes: LiveData<List<Note>>
-    private val repository: NoteRepository
+    val allNotes: LiveData<List<Note>>
+    val repository: NoteRepository
 
     // initializations
     init {
