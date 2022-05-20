@@ -8,18 +8,23 @@ abstract class NotesDao {
 
     // to insert data
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun insert(note: Note)
+    fun insert(note: Note) {
+    }
 
     // to delete data
     @Delete
-    abstract suspend fun delete(note: Note)
+    fun delete(note: Note) {
+    }
 
-    // update
+    // to update data
     @Update
-    abstract suspend fun update(note: Note)
+    fun update(note: Note) {
+    }
 
     // to read the data (all the data)
     @Query("Select * from notesTable order by id ASC")
-    abstract fun getAllNotes(): LiveData<List<Note>>
+    //fun getAllNotes(): LiveData<List<Note>>
+    fun getAllNotes() {
+    }
 
 }
