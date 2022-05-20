@@ -1,4 +1,4 @@
-package `in`.myinnos.androidnote
+package `in`.myinnos.androidnote.model
 
 import `in`.myinnos.androidnote.database.Note
 import `in`.myinnos.androidnote.database.NoteDatabase
