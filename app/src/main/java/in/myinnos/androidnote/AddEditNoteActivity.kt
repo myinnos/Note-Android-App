@@ -1,41 +1,33 @@
 package `in`.myinnos.androidnote
 
 import `in`.myinnos.androidnote.database.Note
+import `in`.myinnos.androidnote.databinding.ActivityAddEditNoteBinding
 import `in`.myinnos.androidnote.model.NoteViewModal
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddEditNoteActivity : AppCompatActivity(){
+class AddEditNoteActivity : AppCompatActivity() {
 
-    lateinit var noteTitleEdt: EditText
-    lateinit var noteEdt: EditText
-    lateinit var saveBtn: Button
-
+    private lateinit var binding: ActivityAddEditNoteBinding
     lateinit var viewModal: NoteViewModal
     var noteID = -1;
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_edit_note)
+        binding = ActivityAddEditNoteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModal = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(NoteViewModal::class.java)
-
-        noteTitleEdt = findViewById(R.id.idEdtNoteName)
-        noteEdt = findViewById(R.id.idEdtNoteDesc)
-        saveBtn = findViewById(R.id.idBtn)
-
+        )[NoteViewModal::class.java]
 
         val noteType = intent.getStringExtra("noteType")
 
@@ -43,16 +35,16 @@ class AddEditNoteActivity : AppCompatActivity(){
             val noteTitle = intent.getStringExtra("noteTitle")
             val noteDescription = intent.getStringExtra("noteDescription")
             noteID = intent.getIntExtra("noteId", -1)
-            saveBtn.text = "Update Note"
-            noteTitleEdt.setText(noteTitle)
-            noteEdt.setText(noteDescription)
+            binding.idBtn.text = "Update Note"
+            binding.idEdtNoteName.setText(noteTitle)
+            binding.idEdtNoteDesc.setText(noteDescription)
         } else {
-            saveBtn.text = "Save Note"
+            binding.idBtn.text = "Save Note"
         }
 
-        saveBtn.setOnClickListener {
-            val noteTitle = noteTitleEdt.text.toString()
-            val noteDescription = noteEdt.text.toString()
+        binding.idBtn.setOnClickListener {
+            val noteTitle = binding.idEdtNoteName.text.toString()
+            val noteDescription = binding.idEdtNoteDesc.text.toString()
 
             if (noteType.equals("Edit")) {
                 if (noteTitle.isNotEmpty() && noteDescription.isNotEmpty()) {
@@ -72,7 +64,7 @@ class AddEditNoteActivity : AppCompatActivity(){
                 }
             }
             // opening the new activity on below line
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            //startActivity(Intent(applicationContext, MainActivity::class.java))
             this.finish()
         }
 

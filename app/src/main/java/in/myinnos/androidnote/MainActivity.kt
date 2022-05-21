@@ -4,33 +4,29 @@ import `in`.myinnos.androidnote.adapter.NoteClickDeleteInterface
 import `in`.myinnos.androidnote.adapter.NoteClickInterface
 import `in`.myinnos.androidnote.adapter.NoteRVAdapter
 import `in`.myinnos.androidnote.database.Note
+import `in`.myinnos.androidnote.databinding.ActivityMainBinding
 import `in`.myinnos.androidnote.model.NoteViewModal
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity(), NoteClickInterface, NoteClickDeleteInterface {
 
+    private lateinit var binding: ActivityMainBinding
     lateinit var viewModal: NoteViewModal
-    lateinit var notesRV: RecyclerView
-    lateinit var addFAB: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        notesRV = findViewById(R.id.notesRV)
-        addFAB = findViewById(R.id.idFAB)
-
-        notesRV.layoutManager = LinearLayoutManager(this)
+        binding.notesRV.layoutManager = LinearLayoutManager(this)
         val noteRVAdapter = NoteRVAdapter(this, this, this)
-        notesRV.adapter = noteRVAdapter
+        binding.notesRV.adapter = noteRVAdapter
 
         viewModal = ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
@@ -42,10 +38,10 @@ class MainActivity : AppCompatActivity(), NoteClickInterface, NoteClickDeleteInt
             }
         })
 
-        addFAB.setOnClickListener {
+        binding.idFAB.setOnClickListener {
             val intent = Intent(this@MainActivity, AddEditNoteActivity::class.java)
             startActivity(intent)
-            this.finish()
+            //this.finish()
         }
 
     }
@@ -62,6 +58,6 @@ class MainActivity : AppCompatActivity(), NoteClickInterface, NoteClickDeleteInt
         intent.putExtra("noteDescription", note.noteDescription)
         intent.putExtra("noteId", note.id)
         startActivity(intent)
-        this.finish()
+        //this.finish()
     }
 }

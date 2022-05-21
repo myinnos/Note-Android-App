@@ -2,6 +2,7 @@ package `in`.myinnos.androidnote.adapter
 
 import `in`.myinnos.androidnote.R
 import `in`.myinnos.androidnote.database.Note
+import `in`.myinnos.androidnote.databinding.NoteRvItemBinding
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
@@ -21,29 +22,22 @@ class NoteRVAdapter(
     // variables
     private val allNotes = ArrayList<Note>()
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val noteTV: TextView = itemView.findViewById(R.id.idTVNote)
-        val dateTV: TextView = itemView.findViewById(R.id.idTVDate)
-        val deleteIV: ImageView = itemView.findViewById(R.id.idIVDelete)
-    }
+    inner class ViewHolder(var viewBinding: NoteRvItemBinding) :
+        RecyclerView.ViewHolder(viewBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteRVAdapter.ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.note_rv_item,
-            parent, false
-        )
+        val itemView = NoteRvItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(itemView)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NoteRVAdapter.ViewHolder, position: Int) {
-        holder.noteTV.text = allNotes.get(position).noteTitle
-        holder.dateTV.text = "Last Updated : " + allNotes[position].timestamp
+        holder.viewBinding.idTVNote.text = allNotes.get(position).noteTitle
+        holder.viewBinding.idTVDate.text = "Last Updated : " + allNotes[position].timestamp
 
-        holder.deleteIV.setOnClickListener {
+        holder.viewBinding.idIVDelete.setOnClickListener {
             noteClickDeleteInterface.onDeleteIconClick(allNotes[position])
         }
-
         holder.itemView.setOnClickListener {
             noteClickInterface.onNoteClick(allNotes[position])
         }
